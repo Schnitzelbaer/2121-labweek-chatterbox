@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Press+Start+2P&display=swap');
+  </style>
+  <title>simple-message-client</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./lib/jquery-3.6.0.min.js"></script>
+  <script src="./base-url.js"></script>
+</head>
+
+<body>
+  <span id="circle" class="circle"></span>
+  <div class="black_box">
+    <div class="black_frame">🟡 🟣 ⚪️</div>
+    <div class="content">
+      <h1>Secret Chat</h1>
+      <h3>☞ First share a secret then discover <br>
+      💥 sercret count: <h4 id="counter"></h4> </h3>
+  </div>
+      <div id="messagearea"></div>
+      <div class="chatarea">
+
+        <input id="channel" type="text" maxlength="200" placeholder="Your channel" value="secret-chat1">
+        <input id="user" type="text" maxlength="200" placeholder="Your name" value="Felix">
+
+        <form>
+          <input id="message" type="text" maxlength="200" placeholder="Your message">
+          <button type="submit" id="submit">CONFESS 💣</button>
+          <button type="clear-button" id="clear-button">CLEAR 💥</button>
+        </form>
+      </div>
+
+      <div id="star" style="display: block;">
+        <p id="star__text">Don't worry,<br>
+          we won't sell<br>your secrets!<br>😉</p>
+        <svg id="star__svg" width="270" height="270" viewBox="0 0 410 410" fill="white"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M115.584 40.82L160.251 82.9932L209.228 45.9123L210.991 107.318L271.843 115.729L229.67 160.396L266.751 209.373L205.345 211.136L196.934 271.988L152.267 229.815L103.29 266.896L101.527 205.49L40.6749 197.079L82.8481 152.412L45.7672 103.435L107.172 101.672L115.584 40.82Z"
+            fill="smoke" stroke="violet"></path>
+        </svg>
+      </div>
+    </div>
+
+
+    <main>
+      <section class="messages">
+        <ul id="messages">
+        </ul>
+      </section>
+
+    </main>
+
+    <script src="./client.js"></script>
+</body>
+
+</html>
