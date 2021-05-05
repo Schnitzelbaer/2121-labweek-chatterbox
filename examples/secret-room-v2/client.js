@@ -10,6 +10,14 @@
 // }, 1000);
 
 
+// prevent right click
+document.addEventListener("contextmenu", preventRightClick);
+function preventRightClick(event) {
+  event.preventDefault();
+}
+
+// 
+
 // button to clear one channel
 $('#clear-button').click(() => {
   let channel = $('input#channel').val();

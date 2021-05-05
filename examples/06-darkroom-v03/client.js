@@ -115,7 +115,8 @@ $(document).click(function(event) {
   console.log("active Text Field: " + activeTextField);
 });
 
-// Detect keypress and adjust textfield-size of active text-field according to text
+// Detect keypress, adjust textfield-size of active text-field according to text
+// and upload new message to server
 $(document).on('input', function() {
   let inputTextLength = "";
 
@@ -128,23 +129,44 @@ $(document).on('input', function() {
     $('#' + activeTextField).css('width', ((inputTextLength.length + 1) * 8) + "px");
   }
 
+
+
+
   // Update text & width of text field on server
   $.get(baseURL + channel, function (messages) {
-    // messages is an array of all the messages in that channel
+    let activeTextFieldNumber = activeTextField.replace( /^\D+/g, '');
+
+
     console.log(messages);
+    console.log("activeTextFieldNumber: " + activeTextFieldNumber);
+    console.log(messages[0]);
 
-      console.log(messages[0]);
+      // Werte von Objects zwischenspeichern
+      let textCache = $('#' + activeTextField).val();
+      let userCache = messages[activeTextFieldNumber].user;
+      let posXCache = messages[activeTextFieldNumber].posX;
+      let posYCache = messages[activeTextFieldNumber].posY;
 
-      // An den Server senden
-      let text = $("textbox"+indexNumber).val();
-      console.log("Text: " + text);
-      let url = baseURL + channel + "?" + $.param({index: indexNumber, text: text, user: "Simon", posX: posX, posY: posY});
-      $.post(url);
+      console.log("Text: " + textCache);
+      let uploadURL = baseURL + channel + "?" + $.param({index: activeTextFieldNumber, text: textCache, user: userCache, posX: posXCache, posY: posYCache});
+      //Delete old object
+      let deleteURL = baseURL + channel + '/delete?' + $.param({ index: activeTextFieldNumber });
+      $.get(deleteURL, function() {
+        //Post new object
+        $.post(uploadURL);
+      });
+      
   });
 });
 
+
+
+
+
+// Listen to Right Click
 document.addEventListener("contextmenu", createNewTextBox);
 
+// Create new Textbox & Object after Right-click
 function createNewTextBox(event) {
   // Context Menu unterbinden
   event.preventDefault();
