@@ -1,4 +1,7 @@
 let channel = "tutorial";
+let posY = "";
+let posX = "";
+i = 0;
 
 $("#send-button").click(sendButtonHandler);
 $("#request-button").click(requestButtonHandler);
@@ -25,4 +28,33 @@ function requestButtonHandler () {
       console.log(messages[i].text);
     }
   });
+
+}
+
+document.addEventListener("click", printMousePos);
+
+function printMousePos(event) {
+
+  posY = event.clientY;
+  posX = event.clientX;
+
+  console.log("clientX: " + posX + " clientY: " + posY)
+
+  if (i < 1) {
+    i++
+    let box = document.createElement('input'); // creates the element
+
+    box.style.position = 'absolute';  // position it
+    box.style.marginLeft = posX + "px";
+    box.style.marginTop = posY + "px";  
+
+    box.setAttribute("id", "textbox");
+
+    document.body.appendChild(box); // add it as last child of body elemnt  
+
+    // $(".textbox").focus("");
+    document.getElementById("textbox").focus();
+  }
+
+
 }
