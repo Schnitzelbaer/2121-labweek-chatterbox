@@ -135,11 +135,11 @@ $(document).on('input', function() {
 
       console.log(messages[0]);
 
-      // // An den Server senden
-      // let text = $("textbox"+indexNumber).val();
-      // let url = baseURL + channel + "?" + $.param({index: indexNumber, text: text, user: "Simon", posX: posX, posY: posY});
-      // console.log(url);
-      // $.post(url);
+      // An den Server senden
+      let text = $("textbox"+indexNumber).val();
+      console.log("Text: " + text);
+      let url = baseURL + channel + "?" + $.param({index: indexNumber, text: text, user: "Simon", posX: posX, posY: posY});
+      $.post(url);
   });
 });
 
@@ -179,16 +179,17 @@ function createNewTextBox(event) {
       posY = event.clientY;
       posX = event.clientX;
     
-        
+    
       let container = document.createElement('div'); // Umschliessender Div
+      let span = document.createElement('SPAN'); // Textfeld umschliessender Span
       let textbox = document.createElement('input'); // Textfeld
       let containerheader = document.createElement('div'); // Draggeable Header
     
       container.style.position = 'absolute';  // position it
       container.style.marginLeft = posX + "px";
       container.style.marginTop = posY + "px";
-      textbox.style.fontSize = "18px";
-      textbox.style.fontFamily = "Inter-Medium, sans-serif";
+      textbox.style.fontSize = "21px";
+      textbox.style.fontFamily = "Roboto-Bold, sans-serif";
       containerheader.style.width = "100%";
       containerheader.style.height = "30px";
       containerheader.style.backgroundColor = "burlywood";
@@ -197,13 +198,15 @@ function createNewTextBox(event) {
       textbox.style.width = ((textbox.value.length + 1) * 8) + 'px';
     
       container.setAttribute("id", "container"+indexNumber);
+      span.setAttribute("id", "size"+indexNumber);
       textbox.setAttribute("id", "textbox"+indexNumber);
       containerheader.setAttribute("id", "containerheader"+indexNumber);
     
       document.body.appendChild(container); // add it as last child of body element 
     
       document.getElementById("container"+indexNumber).appendChild(containerheader) // Header dem umschliessenden Div hinzufügen
-      document.getElementById("container"+indexNumber).appendChild(textbox) // Textbox dem umschliessenden Div hinzufügen
+      document.getElementById("container"+indexNumber).appendChild(span) // Textbox dem umschliessenden Div hinzufügen
+      document.getElementById("size"+indexNumber).appendChild(textbox) // Textbox dem umschliessenden Div hinzufügen
     
       document.getElementById("textbox"+indexNumber).focus();
     
